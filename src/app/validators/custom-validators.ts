@@ -1,5 +1,4 @@
-// custom-validators.ts
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl,ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export function urlValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -7,3 +6,11 @@ export function urlValidator(): ValidatorFn {
     return valid ? null : { 'invalidUrl': { value: control.value } };
   };
 }
+export function websiteValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (!value.includes('.')) {
+      return { websiteInvalid: true };
+    }
+    return null;
+  }};

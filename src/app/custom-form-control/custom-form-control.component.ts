@@ -1,4 +1,3 @@
-// src/app/components/custom-form-control/custom-form-control.component.ts
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 

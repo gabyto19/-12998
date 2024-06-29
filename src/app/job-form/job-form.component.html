@@ -1,22 +1,24 @@
-<!-- src/app/job-form/job-form.component.html -->
 <form [formGroup]="jobForm" (ngSubmit)="addJob()">
   <div>
     <label for="companyName">Company Name:</label>
-    <input id="companyName" formControlName="companyName">
+    <input id="companyName" formControlName="companyName" required>
   </div>
   <div>
     <label for="companyWebsite">Company Website:</label>
-    <input id="companyWebsite" formControlName="companyWebsite" type="url">
+    <input id="companyWebsite" formControlName="companyWebsite" type="url" required>
+    <div style="color: red;" *ngIf="jobForm.get('companyWebsite')?.hasError('websiteInvalid') && jobForm.get('companyWebsite')?.touched">
+      Website URL must contain a period (.)
+    </div>
   </div>
   <div>
     <label for="companyDescription">Company Description:</label>
-    <textarea id="companyDescription" formControlName="companyDescription"></textarea>
+    <textarea id="companyDescription" formControlName="companyDescription" required></textarea>
   </div>
   <div formArrayName="positions">
     <div *ngFor="let position of positions.controls; let i=index" [formGroupName]="i">
       <div>
         <label for="positionName">Position Name:</label>
-        <input id="positionName" formControlName="name">
+        <input id="positionName" formControlName="name" required>
       </div>
       <div>
         <label for="positionLevel">Position Level:</label>
@@ -24,15 +26,15 @@
       </div>
       <div>
         <label for="positionDescription">Position Description:</label>
-        <textarea id="positionDescription" formControlName="description"></textarea>
+        <textarea id="positionDescription" formControlName="description" required></textarea>
       </div>
       <div>
         <label for="startDate">Start Date:</label>
-        <input type="date" id="startDate" formControlName="startDate">
+        <input type="date" id="startDate" formControlName="startDate" required>
       </div>
       <div>
         <label for="endDate">End Date:</label>
-        <input type="date" id="endDate" formControlName="endDate">
+        <input type="date" id="endDate" formControlName="endDate" required>
       </div>
       <button type="button" (click)="removePosition(i)">Remove Position</button>
     </div>

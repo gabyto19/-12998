@@ -1,4 +1,3 @@
-// job.model.ts
 export interface Position {
     id: string;
     name: string;

@@ -1,4 +1,3 @@
-// job.reducer.ts
 import { createReducer, on } from '@ngrx/store';
 import { addJob, removeJob, addPosition, removePosition } from '../actions/job.actions';
 import { Job } from '../../models/job.model';

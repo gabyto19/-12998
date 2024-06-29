@@ -1,9 +1,8 @@
-// src/app/job-form/job-form.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { addJob, removeJob, addPosition, removePosition } from '../store/actions/job.actions';
-import { Job, Position } from '../models/job.model';
+import { addJob, removeJob } from '../store/actions/job.actions';
+import { Job } from '../models/job.model';
 import { v4 as uuid } from 'uuid';
 import { Observable } from 'rxjs';
 import { selectAllJobs } from '../store/selectors/job.selectors';
@@ -24,7 +23,7 @@ export class JobFormComponent implements OnInit {
   ngOnInit(): void {
     this.jobForm = this.fb.group({
       companyName: ['', Validators.required],
-      companyWebsite: ['', [Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})([/\\w .-]*)*/?')]],
+      companyWebsite: ['', [Validators.required, this.websiteValidator()]],
       companyDescription: ['', Validators.required],
       positions: this.fb.array([])
     });
@@ -61,5 +60,15 @@ export class JobFormComponent implements OnInit {
 
   removeJob(id: string): void {
     this.store.dispatch(removeJob({ id }));
+  }
+
+  websiteValidator() {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (!value.includes('.')) {
+        return { websiteInvalid: true };
+      }
+      return null;
+    };
   }
 }

@@ -1,4 +1,3 @@
-// job.actions.ts
 import { createAction, props } from '@ngrx/store';
 import { Job, Position } from '../../models/job.model';
 

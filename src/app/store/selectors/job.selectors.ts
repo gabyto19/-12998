@@ -1,4 +1,3 @@
-// src/app/store/selectors/job.selectors.ts
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { Job } from '../../models/job.model';
 
